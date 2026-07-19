@@ -88,9 +88,8 @@ a{text-decoration:none;color:inherit}
    Blockets ENDA CTA. Blå brand-gradient, mjuk navy-text, vit chip med
    puls-ring, lur optiskt centrerad. Mobil: fullbredd, text vänster /
    ikon höger (live-blockets grammatik); desktop: chip vänster. */
-/* CTA + betyg-pill i EN rad på desktop (pillen bredvid ring-knappen, inte under)
-   — mobil staplar dem (kolumn) oförändrat. */
-.mcta__action{display:flex;align-items:center;flex-wrap:wrap;gap:20px;margin-top:8px}
+/* CTA + betyg-rad staplade (betyget UNDER knappen, som mobilen) — samma på desktop. */
+.mcta__action{display:flex;flex-direction:column;align-items:flex-start;gap:16px;margin-top:8px}
 .mcta__cta{display:flex;flex-wrap:wrap;gap:14px}
 .btn-ring{
   display:inline-flex;align-items:center;
@@ -142,34 +141,21 @@ a{text-decoration:none;color:inherit}
 /* optisk mikro-nudge: luren en gnutta ner-vänster i chipen */
 .btn-ring__chip svg{transform:translate(-1px,1px)}
 
-/* proof-raden — "verifierad pill" (T1): vit kapsel på vit kort-yta.
-   Separationen kommer från EN hårfin kant + EN mjuk skugga (inte fem djupgrep).
-   Läser som ETT objekt vid beslutet: färgad Google-G · 5,0 på Google · fem GULA
-   stjärnor. Pillens VÄNSTERKANT linjerar med rubrik/CTA (innehållet en aning
-   indraget av paddingen — normalt för en badge). Hela pillen = EN länk, 44px. */
+/* proof-raden — REN inline-rad UNDER CTA:n (ingen box/container, ägar-önskan):
+   färgad Google-G · "5,0 på Google" · fem GULA stjärnor. Diskret underline på
+   hover (länk till recensioner). Hela raden = EN länk, 44px hit-area. */
 .g-row{
-  display:inline-flex;align-items:center;flex-wrap:nowrap;gap:8px;
-  min-height:44px;padding:0 16px;
-  background:#fff;
-  border:1px solid rgba(9,11,50,.10);   /* hårfin kant — crisp edge på vitt */
-  border-radius:999px;                    /* full pill-kapsel */
-  box-shadow:0 3px 12px -4px rgba(9,11,50,.12); /* EN mjuk skugga, tight spread */
-  font-size:1.5rem;font-weight:400;color:hsl(237 35% 24%);line-height:1;
-  transition:box-shadow .18s ease, border-color .18s ease;
+  display:inline-flex;align-items:center;flex-wrap:wrap;gap:10px;
+  min-height:44px;padding:6px 0;
+  font-size:1.5rem;font-weight:400;color:var(--midnight);line-height:1;
 }
-.g-row:hover{  /* kritiker-villkor 5: CTA äger rörelsen — INGEN lift; bara en viskning i kant/skugga */
-  box-shadow:0 4px 14px -4px rgba(9,11,50,.15);
-  border-color:rgba(9,11,50,.16);
-}
+.g-row:hover .g-label{text-decoration:underline;text-underline-offset:3px}
 .g-row:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
-.g-row .g-icon{display:block;flex:0 0 auto;width:18px;height:18px}
-.g-row .g-label{display:block;white-space:nowrap;letter-spacing:.005em}
+.g-row .g-icon{display:block;flex:0 0 auto;width:17px;height:17px}
+.g-row .g-label{display:block;white-space:nowrap}
 .g-row strong{font-weight:700}           /* "5,0" fet, "på Google" ärver 400 */
-.g-row .stars{display:inline-flex;gap:2px;flex:0 0 auto}
-.g-row .stars svg{width:15px;height:15px;fill:#FBBC04;display:block} /* Google-guld */
-@media (prefers-reduced-motion:reduce){
-  .g-row{transition:none}
-}
+.g-row .stars{display:inline-flex;gap:3px;flex:0 0 auto}
+.g-row .stars svg{width:15px;height:15px;fill:#FBBC04;display:block} /* gula stjärnor (ägar-önskan) */
 
 /* bildblocket — baslinjens geometri: kolumn 400px, bilden 80 % bredd,
    flex-end, samma boxproportion som originalbilden (320×366), radius,
@@ -223,8 +209,8 @@ a{text-decoration:none;color:inherit}
   .mcta__text{align-items:center}
   .mcta__h{text-align:center;font-size:clamp(2.4rem,5.5vw,3rem);line-height:1.16}
   .mcta__p{text-align:center}
-  /* mobil: stapla CTA + pill (oförändrat läge — ägaren gillar mobilversionen) */
-  .mcta__action{flex-direction:column;align-items:center;width:100%;gap:16px}
+  /* mobil: CTA + betyg-rad centrerade, fullbredd (oförändrat läge) */
+  .mcta__action{align-items:center;width:100%}
   .mcta__cta{width:100%;flex-direction:column;gap:12px}
   /* mobil: text vänster / ikon höger (live-blockets grammatik) */
   .btn-ring{width:100%;flex-direction:row-reverse;justify-content:space-between;padding:11px 12px 11px 22px}
