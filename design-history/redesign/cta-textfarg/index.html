@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CTA — A/B textfärg (svart vs vit)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html{font-size:62.5%}
+body{margin:0;font-family:'Outfit',system-ui,sans-serif;background:#f5f9ff;color:#363636;font-weight:300;-webkit-font-smoothing:antialiased;padding:48px 20px 80px}
+.lab{max-width:1100px;margin:0 auto}
+.lab h1{font-size:2.8rem;font-weight:600;color:hsl(237 69% 12%);margin:0 0 6px}
+.lab .lede{font-size:1.5rem;line-height:1.6;margin:0 0 12px;max-width:74ch}
+.note{font-size:1.35rem;line-height:1.55;color:#8a6d1f;background:#fff8e6;border:1px solid #f2e2b0;border-radius:10px;padding:12px 16px;margin:0 0 32px;max-width:74ch}
+.row{background:#fff;border-radius:20px;box-shadow:0 8px 24px rgba(9,11,50,.06);padding:26px 30px;margin-bottom:24px}
+.row h2{font-size:1.9rem;font-weight:600;color:hsl(237 69% 12%);margin:0 0 2px}
+.row .sub{font-size:1.3rem;color:#8a8fa3;margin:0 0 20px}
+.slots{display:grid;grid-template-columns:1fr 350px;gap:24px;align-items:start}
+.slot{border:1px dashed rgba(9,11,50,.14);border-radius:14px;padding:24px;position:relative}
+.slot .slabel{position:absolute;top:-9px;left:14px;background:#fff;font-size:1.1rem;font-weight:600;color:#8a8fa3;padding:0 6px;letter-spacing:.06em;text-transform:uppercase}
+@media (max-width:860px){.slots{grid-template-columns:1fr}}
+
+/* ==== DELAT knapp-skelett (identiskt med va/) ==== */
+.cta{display:flex;flex-wrap:wrap;gap:14px}
+.btn-ring,.btn-radgivning{
+  display:inline-flex;align-items:center;min-height:58px;border-radius:16px;
+  font-size:1.6rem;font-weight:500;line-height:1;white-space:nowrap;
+  color:hsl(237 35% 24%);text-decoration:none;
+  transition:transform .16s ease, box-shadow .16s ease, filter .16s ease;
+}
+.btn-ring{gap:14px;padding:11px 30px 11px 12px;
+  background:linear-gradient(120deg,#b6f2ff 0%,#5eb1bf 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 2px 4px rgba(9,11,50,.06),0 10px 26px -6px rgba(94,177,191,.55)}
+.btn-ring:hover{transform:translateY(-1.5px);filter:saturate(1.08) brightness(1.02)}
+.btn-ring__chip{position:relative;flex:0 0 auto;width:36px;height:36px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.92);color:hsl(237 35% 24%);box-shadow:0 1px 3px rgba(9,11,50,.14)}
+.btn-ring__chip::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 0 rgba(255,255,255,.65);animation:ring 2.8s cubic-bezier(.4,0,.4,1) infinite}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(255,255,255,.65)}55%{box-shadow:0 0 0 9px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
+.btn-radgivning{gap:16px;padding:11px 24px;
+  background:linear-gradient(120deg,#55ff9a 0%,#5eb1bf 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 2px 4px rgba(9,11,50,.06),0 10px 26px -6px rgba(94,199,160,.45)}
+.btn-radgivning:hover{transform:translateY(-1.5px);filter:saturate(1.06) brightness(1.02)}
+.btn-radgivning .pil{transition:transform .16s ease}
+.btn-radgivning:hover .pil{transform:scale(1.18)}
+.btn-ring svg,.btn-radgivning svg{flex:0 0 auto}
+
+/* ==== VIT-TEXT-modifiern (endast textfärg — chip oförändrad) ==== */
+.txt-vit .btn-ring,.txt-vit .btn-radgivning{color:#fff}
+.txt-vit .btn-radgivning svg{stroke:#fff}
+/* chipen behålls vit m. mörk lur för läsbarhet på ikonen */
+
+/* ==== mobil-slot: låst layout (text vänster / ikon höger) ==== */
+.slot-mob .cta{flex-direction:column;gap:12px;width:100%}
+.slot-mob .btn-ring{width:100%;flex-direction:row-reverse;justify-content:space-between;padding:11px 12px 11px 22px}
+.slot-mob .btn-radgivning{width:100%;justify-content:space-between;padding:11px 22px}
+
+@media (prefers-reduced-motion:reduce){
+  .btn-ring__chip::after{animation:none}
+  .btn-ring,.btn-radgivning,.btn-radgivning .pil{transition:none}
+}
+</style>
+</head>
+<body>
+<main class="lab">
+  <h1>A/B — textfärg i CTA-knapparna</h1>
+  <p class="lede">Samma knappar, samma gradienter, samma låsta mobil-layout. Enda skillnaden är textfärgen: nuvarande mjuka navy mot vit. Hovra för att se lyft och pil-skala.</p>
+  <p class="note"><strong>Ärlig flagga:</strong> vit text möter WCAG-kontrast cirka 1,3 till 2,4:1 mot dessa ljusa gradienter (kravet är 4,5:1). Den ljusblå och gröna vänsteränden gör vit text svag. Navy klarar cirka 7:1. Vit kan vinna på känsla men förlorar på läsbarhet och tillgänglighet, värt att väga in.</p>
+
+  <!-- ============ SVART / NAVY (nuvarande) ============ -->
+  <section class="row">
+    <h2>A · Mörk navy-text</h2>
+    <p class="sub">Nuvarande (hsl 237 35% 24%), hög kontrast och tillgänglig.</p>
+    <div class="slots">
+      <div class="slot"><span class="slabel">Desktop</span>
+        <div class="cta">
+          <a class="btn-ring" href="tel:+46102657979">
+            <span class="btn-ring__chip" aria-hidden="true"><svg width="17" height="17" viewBox="0.45 -0.49 19 20" fill="none"><path d="M11.9 4.2c.8.2 1.5.6 2 1.1.6.6 1 1.3 1.1 2.1M11.9.8c1.6.2 3.1 1 4.2 2.2 1.2 1.2 1.9 2.7 2.1 4.4M17.4 14.1v2.5c0 .5-.2.9-.5 1.2-.3.3-.8.5-1.2.4-2.4-.3-4.8-1.2-6.8-2.6-1.9-1.3-3.5-3-4.8-5-1.3-2.2-2.2-4.6-2.4-7.2 0-.5.1-.9.4-1.2.3-.3.7-.5 1.2-.5h2.4c.8 0 1.5.6 1.6 1.4.1.8.3 1.6.6 2.3.2.6.1 1.3-.4 1.8l-1 1c1.1 2.1 2.8 3.8 4.7 5l1-1c.5-.5 1.2-.6 1.8-.4.7.3 1.5.5 2.3.6.8.1 1.4.8 1.4 1.7Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Ring 010-265 79 79</a>
+          <a class="btn-radgivning" href="https://ampy.se/kontakt/">Kostnadsfri rådgivning<svg class="pil" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.7 11.3 11.3 4.7M11.3 4.7H4.7M11.3 4.7v6.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+      <div class="slot slot-mob"><span class="slabel">Mobil 350px</span>
+        <div class="cta">
+          <a class="btn-ring" href="tel:+46102657979">
+            <span class="btn-ring__chip" aria-hidden="true"><svg width="17" height="17" viewBox="0.45 -0.49 19 20" fill="none"><path d="M11.9 4.2c.8.2 1.5.6 2 1.1.6.6 1 1.3 1.1 2.1M11.9.8c1.6.2 3.1 1 4.2 2.2 1.2 1.2 1.9 2.7 2.1 4.4M17.4 14.1v2.5c0 .5-.2.9-.5 1.2-.3.3-.8.5-1.2.4-2.4-.3-4.8-1.2-6.8-2.6-1.9-1.3-3.5-3-4.8-5-1.3-2.2-2.2-4.6-2.4-7.2 0-.5.1-.9.4-1.2.3-.3.7-.5 1.2-.5h2.4c.8 0 1.5.6 1.6 1.4.1.8.3 1.6.6 2.3.2.6.1 1.3-.4 1.8l-1 1c1.1 2.1 2.8 3.8 4.7 5l1-1c.5-.5 1.2-.6 1.8-.4.7.3 1.5.5 2.3.6.8.1 1.4.8 1.4 1.7Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Ring 010-265 79 79</a>
+          <a class="btn-radgivning" href="https://ampy.se/kontakt/">Kostnadsfri rådgivning<svg class="pil" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.7 11.3 11.3 4.7M11.3 4.7H4.7M11.3 4.7v6.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VIT ============ -->
+  <section class="row txt-vit">
+    <h2>B · Vit text</h2>
+    <p class="sub">Ren vit (#fff), luftigare känsla men lägre kontrast.</p>
+    <div class="slots">
+      <div class="slot"><span class="slabel">Desktop</span>
+        <div class="cta">
+          <a class="btn-ring" href="tel:+46102657979">
+            <span class="btn-ring__chip" aria-hidden="true"><svg width="17" height="17" viewBox="0.45 -0.49 19 20" fill="none"><path d="M11.9 4.2c.8.2 1.5.6 2 1.1.6.6 1 1.3 1.1 2.1M11.9.8c1.6.2 3.1 1 4.2 2.2 1.2 1.2 1.9 2.7 2.1 4.4M17.4 14.1v2.5c0 .5-.2.9-.5 1.2-.3.3-.8.5-1.2.4-2.4-.3-4.8-1.2-6.8-2.6-1.9-1.3-3.5-3-4.8-5-1.3-2.2-2.2-4.6-2.4-7.2 0-.5.1-.9.4-1.2.3-.3.7-.5 1.2-.5h2.4c.8 0 1.5.6 1.6 1.4.1.8.3 1.6.6 2.3.2.6.1 1.3-.4 1.8l-1 1c1.1 2.1 2.8 3.8 4.7 5l1-1c.5-.5 1.2-.6 1.8-.4.7.3 1.5.5 2.3.6.8.1 1.4.8 1.4 1.7Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Ring 010-265 79 79</a>
+          <a class="btn-radgivning" href="https://ampy.se/kontakt/">Kostnadsfri rådgivning<svg class="pil" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.7 11.3 11.3 4.7M11.3 4.7H4.7M11.3 4.7v6.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+      <div class="slot slot-mob"><span class="slabel">Mobil 350px</span>
+        <div class="cta">
+          <a class="btn-ring" href="tel:+46102657979">
+            <span class="btn-ring__chip" aria-hidden="true"><svg width="17" height="17" viewBox="0.45 -0.49 19 20" fill="none"><path d="M11.9 4.2c.8.2 1.5.6 2 1.1.6.6 1 1.3 1.1 2.1M11.9.8c1.6.2 3.1 1 4.2 2.2 1.2 1.2 1.9 2.7 2.1 4.4M17.4 14.1v2.5c0 .5-.2.9-.5 1.2-.3.3-.8.5-1.2.4-2.4-.3-4.8-1.2-6.8-2.6-1.9-1.3-3.5-3-4.8-5-1.3-2.2-2.2-4.6-2.4-7.2 0-.5.1-.9.4-1.2.3-.3.7-.5 1.2-.5h2.4c.8 0 1.5.6 1.6 1.4.1.8.3 1.6.6 2.3.2.6.1 1.3-.4 1.8l-1 1c1.1 2.1 2.8 3.8 4.7 5l1-1c.5-.5 1.2-.6 1.8-.4.7.3 1.5.5 2.3.6.8.1 1.4.8 1.4 1.7Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Ring 010-265 79 79</a>
+          <a class="btn-radgivning" href="https://ampy.se/kontakt/">Kostnadsfri rådgivning<svg class="pil" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.7 11.3 11.3 4.7M11.3 4.7H4.7M11.3 4.7v6.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <p class="note" style="color:#565b72;background:#fff;border-color:rgba(9,11,50,.12)">Säg <strong>A</strong> (navy) eller <strong>B</strong> (vit) så låser jag textfärgen i version A. Ikoncentreringen och grön-hovern (skala) är redan fixade i själva blocket.</p>
+</main>
+</body>
+</html>

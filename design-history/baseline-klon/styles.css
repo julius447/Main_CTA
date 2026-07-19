@@ -1,0 +1,159 @@
+/* Ampy "Main CTA" — 1:1 clone of the live block (ampy.se, fetched 2026-07-18).
+   Layered exactly like the live cascade:
+     1) Bricks frontend base   (frontend-light-layer.min.css — verbatim subset)
+     2) Ampy theme style       (theme-style-ampy.min.css — verbatim subset)
+     3) Global classes         (bricks inline frontend CSS — verbatim)
+     4) Element (brxe-id) CSS  (post-15589.min.css — verbatim subset)
+     5) Interactions (fadeIn)  (Bricks enterView equivalent)
+   Depends on tokens.css. Do not reconcile tokens/gradients here — clone only. */
+
+/* ============ 1) Bricks frontend base (verbatim subset) ============ */
+*,:after,:before{box-sizing:border-box}
+body{
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  background-color:#fff;background-position:50%;color:#363636;
+  font-family:-apple-system,"system-ui",Segoe UI,roboto,helvetica,arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+  font-size:15px;line-height:1.7;
+  display:flex;flex-direction:column;margin:0 auto;width:100%;
+}
+h1,h2,h3,h4,h5,h6{margin:0;text-rendering:optimizelegibility}
+h1,h2{line-height:1.4}
+:where(p){margin-block:0 1.2em}
+:where(p:last-of-type){margin-block-end:0}
+img{height:auto;max-width:100%;outline:none;vertical-align:middle}
+figure{margin:0}
+a{text-decoration:none;color:inherit}
+
+.brxe-section{align-items:center;display:flex;flex-direction:column;margin-left:auto;margin-right:auto;width:100%}
+.brxe-container{align-items:flex-start;display:flex;flex-direction:column;margin-left:auto;margin-right:auto;width:1100px;max-width:100%}
+.brxe-block{align-items:flex-start;display:flex;flex-direction:column;width:100%}
+@media (max-width:767px){
+  .brxe-section{flex-wrap:wrap}
+  .brxe-container{flex-wrap:wrap}
+  .brxe-block{flex-wrap:wrap}
+}
+.bricks-button{align-items:center;border-width:0;display:inline-flex;gap:10px;justify-content:center;letter-spacing:.5px;padding:.5em 1em;text-align:center;cursor:pointer;white-space:nowrap}
+.bricks-button i{position:relative}
+.bricks-background-primary{background-color:#ffd64f} /* live Bricks primary var — sits under the gradient, invisible but 1:1 */
+/* Live: the G-icon link is display:block and the icon sits on the BASELINE
+   (inline svg) — the line-box descender makes the rating row 38px tall, not 30.
+   A live quirk we keep; the icon here is an <img> so we undo img{vertical-align:middle}. */
+.bricks-link-wrapper{display:block}
+.brxe-0d1c97.brxi-rdxwwf{vertical-align:baseline}
+
+/* Ionicons (star glyph) — font self-hosted from ampy.se/wp-content/themes/bricks */
+@font-face{
+  font-display:swap;font-family:Ionicons;font-style:normal;font-weight:400;
+  src:url(assets/fonts/ionicons.woff2) format("woff2");
+}
+[class^=ion-],[class*=" ion-"]{
+  speak:never;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  display:inline-block;font-family:Ionicons;font-style:normal;font-variant:normal;
+  font-weight:400;line-height:1;text-rendering:auto;text-transform:none;
+}
+.ion-md-star:before{content:"\f384"}
+
+/* ============ 2) Ampy theme style (verbatim subset) ============ */
+body{font-size:var(--aptext-sm);font-family:"Outfit";font-weight:300;background:none}
+.brxe-section{padding-top:var(--apspace-l);padding-right:var(--apspace-l);padding-bottom:var(--apspace-l);padding-left:var(--apspace-l)}
+.brxe-container{width:1280px}
+h2{font-size:var(--aptext-2-5xl);font-weight:500}
+@media (max-width:767px){
+  .brxe-section{padding-top:var(--apspace-xl);padding-bottom:var(--apspace-xl)}
+}
+
+/* ============ 3) Global classes (verbatim from live inline frontend CSS) ============ */
+.main-cta-__container.brxe-container {padding-top: var(--apspace-l); padding-right: var(--apspace-2xl); padding-bottom: var(--apspace-l); padding-left: var(--apspace-2xl); background-color: #ffffff; border-radius: var(--apradius-l); box-shadow: 0 0 16px 0 rgba(190, 190, 190, 0.4); flex-direction: row; row-gap: var(--apspace-2xs); column-gap: var(--apspace-m); align-items: center; align-self: flex-start !important}
+@media (max-width: 1024px) {.main-cta-__container.brxe-container {padding-right: var(--apspace-l); padding-left: var(--apspace-l)}}
+@media (max-width: 478px) {.main-cta-__container.brxe-container {padding-top: var(--space-m)}}
+@media (max-width: 320px) {.main-cta-__container.brxe-container {padding-top: var(--space-s); padding-right: var(--space-s); padding-left: var(--space-s)}}
+.main-cta-__inner-container.brxe-container {position: relative; background-color: var(--white)}
+.main-cta-__block.brxe-block {position: relative; align-items: flex-start}
+.main-cta-__heading.brxe-heading {font-weight: 500; line-height: 1; font-size: var(--aptext-2-5xl); text-align: left; color: var(--color-3); width: 90%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-image: linear-gradient(90deg, var(--color-25) 25%, var(--color-7) 70%)}
+@media (max-width: 1024px) {.main-cta-__heading.brxe-heading {width: 80%}}
+@media (max-width: 767px) {.main-cta-__heading.brxe-heading {text-align: left; width: 100%}}
+@media (max-width: 478px) {.main-cta-__heading.brxe-heading {text-align: left; line-height: 1.2; font-size: var(--aptext-2xl); margin-right: 0; margin-left: 0; max-width: 100%; width: 100%}}
+@media (max-width: 320px) {.main-cta-__heading.brxe-heading {width: 100%; font-size: var(--aptext-l)}}
+.main-cta-__text-basic.brxe-text {font-weight: 300; line-height: 1.6; font-size: var(--aptext-m); margin-top: 0; max-width: 90%}
+.main-cta-__text-basic.brxe-text a {font-weight: 300; line-height: 1.6; font-size: var(--aptext-m); font-size: inherit}
+@media (max-width: 1024px) {.main-cta-__text-basic.brxe-text {max-width: 100%}}
+@media (max-width: 767px) {.main-cta-__text-basic.brxe-text {text-align: left}.main-cta-__text-basic.brxe-text a {text-align: left; font-size: inherit}}
+@media (max-width: 478px) {.main-cta-__text-basic.brxe-text {font-size: var(--text-m); color: var(--color-20); text-align: justify; max-width: 100%; padding-top: 0; padding-bottom: 0}.main-cta-__text-basic.brxe-text a {font-size: var(--text-m); color: var(--color-20); text-align: justify; font-size: inherit}}
+.main-cta-__overlay-wave.brxe-image {max-width: 50%; height: auto; right: 0px; bottom: 0px; z-index: 0; position: absolute}
+@media (max-width: 478px) {.main-cta-__overlay-wave.brxe-image {display: none; visibility: collapse}}
+.main-cta-__bg-wave.brxe-image {max-width: 50%; height: auto; position: absolute; right: 0px; bottom: 0px}
+@media (max-width: 767px) {.main-cta-__bg-wave.brxe-image {display: none; visibility: collapse}}
+
+/* ============ 4) Element (brxe-id) CSS (verbatim from post-15589.min.css) ============ */
+.brxe-qvupqc { background-color:#f5f9ff;background-position:bottom right;background-size:940px;background-repeat:no-repeat;align-items:flex-start;align-self:flex-start!important;justify-content:flex-start }
+@media (max-width:478px) { .brxe-qvupqc { padding-right:var(--space-xs);padding-left:var(--space-xs) } }
+.brxe-8cb310 { row-gap:var(--apspace-2xs);flex-direction:row;column-gap:var(--apspace-m);background-color:#fff;border-radius:var(--apradius-l);align-items:center;align-self:flex-start!important;box-shadow:0 0 16px 0 rgb(190 190 190 / .4) }
+@media (max-width:1024px) { .brxe-8cb310 { padding-right:var(--apspace-l);padding-left:var(--apspace-l) } }
+@media (max-width:478px) { .brxe-8cb310 { padding-top:var(--space-m) } }
+@media (max-width:320px) { .brxe-8cb310 { padding-top:var(--space-s);padding-right:var(--space-s);padding-left:var(--space-s) } }
+.brxe-e9455c { align-items:flex-start;align-self:flex-start!important;flex-direction:row;column-gap:var(--apspace-m);row-gap:var(--apspace-2xs);background-color:#fff;background-position:bottom right;background-repeat:no-repeat;background-size:550px;border-radius:var(--apradius-l);position:relative;padding-top:0;padding-right:0;padding-bottom:0;padding-left:0 }
+@media (max-width:1024px) { .brxe-e9455c { column-gap:var(--apspace-4xs) } }
+@media (max-width:767px) { .brxe-e9455c { row-gap:var(--apspace-m);flex-direction:row;flex-wrap:wrap-reverse } }
+@media (max-width:478px) { .brxe-e9455c { flex-direction:column-reverse } }
+.brxe-c3105c { align-self:center!important;justify-content:center;row-gap:var(--apspace-2xs);margin-top:var(--space-s);margin-bottom:var(--space-s);z-index:1 }
+@media (max-width:1024px) { .brxe-c3105c { row-gap:var(--apspace-3xs);margin-top:0;margin-bottom:0 } }
+@media (max-width:767px) { .brxe-c3105c { align-items:center } }
+@media (max-width:478px) { .brxe-c3105c { position:relative;row-gap:var(--apspace-xs) } }
+@media (max-width:1024px) { .brxe-9f3ce8 { width:80% } }
+@media (max-width:767px) { .brxe-9f3ce8 { text-align:center } }
+@media (max-width:478px) { .brxe-9f3ce8 { max-width:100%;text-align:center;line-height:1.2;font-size:var(--aptext-2xl);margin-right:0;margin-left:0;width:100% } }
+@media (max-width:320px) { .brxe-9f3ce8 { width:100%;font-size:var(--aptext-l) } }
+.brxe-5a3bdb { font-weight:300;flex-direction:row;column-gap:20px;justify-content:flex-start;margin-top:var(--apspace-xs);margin-bottom:var(--apspace-xs);z-index:1 }
+@media (max-width:767px) { .brxe-5a3bdb { align-items:flex-start;align-self:flex-start!important;justify-content:flex-start } }
+@media (max-width:478px) { .brxe-5a3bdb { row-gap:var(--apspace-xs);height:auto;position:relative } }
+.brxe-076d6b svg { height:var(--aptext-m);width:var(--aptext-m);stroke-width:1px }
+.brxe-076d6b { padding-top:var(--apspace-2xs);padding-right:var(--space-m);padding-bottom:var(--apspace-2xs);padding-left:var(--space-m);border-top-width:0;border-top-style:none;border-radius:var(--radius-m);background-image:linear-gradient(120deg,#55ff9a 0%,#5eb1bf 100%);font-weight:400;font-size:var(--aptext-sm);box-shadow:0 0 16px 0 rgb(241 241 241 / .25);justify-content:space-between;gap:var(--apspace-l) }
+@media (max-width:1024px) { .brxe-076d6b { justify-content:space-between;padding-right:var(--apspace-s);padding-left:var(--apspace-s) } }
+@media (max-width:478px) { .brxe-076d6b svg { height:var(--aptext-m);width:var(--aptext-m) } }
+@media (max-width:478px) { .brxe-076d6b { width:100%;padding-top:var(--apspace-s);padding-right:var(--apspace-l);padding-bottom:var(--apspace-s);padding-left:var(--apspace-l);justify-content:space-between } }
+@media (max-width:320px) { .brxe-076d6b { padding-top:var(--space-s);padding-bottom:var(--space-s) } }
+.brxe-395b4f svg { height:var(--aptext-m);width:var(--aptext-m);fill:#fff0;color:#fff0;stroke:#212121;stroke-width:1px }
+.brxe-395b4f { padding-top:var(--apspace-2xs);padding-right:var(--space-m);padding-bottom:var(--apspace-2xs);padding-left:var(--space-m);border-top-width:0;border-top-style:none;border-radius:var(--radius-m);background-image:linear-gradient(141deg,#b6f2ff 0%,#5eb1bf 100%);font-weight:400;font-size:var(--aptext-sm);box-shadow:0 0 16px 0 rgb(241 241 241 / .23);gap:var(--apspace-l);justify-content:space-between }
+@media (max-width:478px) { .brxe-395b4f { width:100%;justify-content:space-between;padding-top:var(--apspace-s);padding-right:var(--apspace-l);padding-bottom:var(--apspace-s);padding-left:var(--apspace-l);margin-bottom:0 } }
+@media (max-width:320px) { .brxe-395b4f { padding-top:var(--space-s);padding-bottom:var(--space-s) } }
+.brxe-ea2ff9 { align-items:center;align-self:center!important;flex-direction:row;column-gap:10px;justify-content:flex-start }
+@media (max-width:767px) { .brxe-ea2ff9 { align-items:center;justify-content:flex-start;align-self:center!important } }
+@media (max-width:478px) { .brxe-ea2ff9 { align-self:center!important;align-items:center;justify-content:center } }
+.brxe-0d1c97.brxi-rdxwwf { height:30px;width:30px;margin-right:4px }
+@media (max-width:767px) { .brxe-0d1c97.brxi-rdxwwf { width:20px } }
+.brxe-gtoqru { align-items:center;align-self:center!important;flex-direction:row;display:flex;column-gap:5px }
+@media (max-width:767px) { .brxe-gtoqru { align-self:center!important;justify-content:center;align-items:center } }
+.brxe-kcsijf { color:var(--color-15);text-align:left;font-size:var(--aptext-sm);text-transform:uppercase;font-weight:800;font-family:"Plus Jakarta Sans" }
+.brxe-kcsijf p { margin:0;line-height:1 }
+@media (max-width:1024px) { .brxe-kcsijf { line-height:1 } }
+@media (max-width:478px) { .brxe-kcsijf { font-size:var(--aptext-m);color:var(--color-15) } }
+.brxe-yfolkd { line-height:0;text-align:center;margin-top:0;margin-right:0;margin-bottom:0;margin-left:0;justify-content:space-between;align-items:center;align-self:center!important;padding-top:0;padding-right:0;padding-left:0;flex-direction:row;display:flex;row-gap:0;column-gap:4px }
+/* ⚑ QUIRK (verbatim): "apspace-4xs" below is missing var() on the live site — invalid, so the 4px gap survives */
+@media (max-width:767px) { .brxe-yfolkd { column-gap:apspace-4xs;align-items:center;justify-content:center;align-self:center!important } }
+@media (max-width:478px) { .brxe-yfolkd { margin-bottom:0 } }
+@media (max-width:320px) { .brxe-yfolkd { margin-bottom:0;padding-bottom:0;line-height:0;justify-content:center;align-self:center!important;align-items:center } }
+.brxe-tishbo.brxi-rdxwwf,
+.brxe-dyptgi.brxi-rdxwwf,
+.brxe-xwsirf.brxi-rdxwwf,
+.brxe-xktaol.brxi-rdxwwf,
+.brxe-mmcper.brxi-rdxwwf { margin-bottom:0;color:var(--color-15);fill:var(--color-15);font-size:18px;width:100%;height:100%;position:relative;border:0;border-style:none }
+.brxe-f50bdf { border-radius:var(--apradius-l);max-width:400px;align-self:flex-end!important;position:relative;align-items:flex-end;overflow:hidden;z-index:1 }
+@media (max-width:1024px) { .brxe-f50bdf { width:auto;height:100%;max-width:100% } }
+@media (max-width:767px) { .brxe-f50bdf { align-self:center!important;justify-content:center;align-items:center;flex-direction:column;flex-grow:1 } }
+.brxe-4cb7bc { border-radius:var(--apradius-l);align-self:flex-end;width:80%;height:90%;max-height:100%;max-width:100% }
+.brxe-4cb7bc img { border-radius:var(--apradius-l);width:100%;height:100%;object-fit:cover }
+@media (max-width:767px) { .brxe-4cb7bc { width:100%;height:100% } }
+@media (max-width:478px) { .brxe-4cb7bc { width:100%;max-width:100% } }
+.brxe-yhfqbw { position:absolute;z-index:5;right:0;bottom:0;display:none;visibility:collapse }
+@media (max-width:478px) { .brxe-yhfqbw { align-self:flex-end;z-index:5;position:absolute;bottom:0;display:block;visibility:visible;width:60% } }
+.brxe-be7bb0 { position:absolute;bottom:0;right:0;z-index:0;height:auto;max-width:50% }
+.brxe-be7bb0:not(.tag),.brxe-be7bb0 img { object-fit:contain }
+@media (max-width:478px) { .brxe-be7bb0 { max-width:100%;z-index:2;display:none;visibility:collapse } }
+.brxe-995ae9 { position:absolute;bottom:0;right:0;z-index:0;height:auto;max-width:50% }
+.brxe-995ae9:not(.tag),.brxe-995ae9 img { object-fit:contain }
+@media (max-width:767px) { .brxe-995ae9 { display:none;visibility:collapse } }
+
+/* ============ 5) Interactions — Bricks enterView fadeIn equivalent ============ */
+[data-interaction-hidden-on-load="1"]{opacity:0}
+.brx-animated-fadein{animation:fadeIn var(--animate-duration,1s) both}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}

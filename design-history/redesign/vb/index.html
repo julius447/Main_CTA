@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Main CTA — Version B · Proof först</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   VERSION B — "Proof först": Google-betyget som eyebrow ÖVER
+   rubriken (proof före ask), EN primär CTA + ring som textlänk,
+   namnchip på fotot (äkta elektriker = äkta trovärdighet).
+   Gradient på värdelöftet. Ampy-tokens verbatim.
+   ============================================================ */
+:root{
+  --teal:hsl(171 100% 33%);
+  --teal-bright:hsl(171 95% 41%);
+  --blue:hsl(189 43% 56%);
+  --midnight:hsl(237 69% 12%);
+  --ink:#363636;
+  --section-bg:#f5f9ff;
+  --radius-l:clamp(16px, 1.4vw, 20px);
+  --radius-m:16px;
+}
+*,:after,:before{box-sizing:border-box}
+html{font-size:62.5%}
+body{
+  margin:0;font-family:'Outfit',system-ui,sans-serif;font-weight:300;
+  color:var(--ink);background:#fff;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+
+.mcta{background:var(--section-bg);padding:clamp(28px,4vw,56px) clamp(16px,3vw,40px);display:flex;justify-content:center}
+.mcta__card{
+  width:min(1280px,100%);
+  background:#fff;border-radius:var(--radius-l);
+  box-shadow:0 1px 2px rgba(9,11,50,.04), 0 8px 24px rgba(9,11,50,.06), 0 24px 64px -12px rgba(9,11,50,.10);
+  display:grid;grid-template-columns:1fr 400px;gap:clamp(24px,3vw,48px);
+  padding:clamp(28px,3.2vw,48px) clamp(28px,4.5vw,72px);
+  align-items:center;
+}
+.mcta__text{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(12px,1.4vw,18px)}
+
+/* proof-eyebrow — g-row-mönstret, pill-form så det läses som badge */
+.g-row{
+  display:inline-flex;align-items:center;gap:10px;
+  min-height:44px;padding:10px 18px;border-radius:999px;
+  background:rgba(0,169,145,.07);
+  font-size:1.45rem;font-weight:400;color:var(--midnight);line-height:1;
+}
+.g-row strong{font-weight:700}
+.g-row:hover .g-label{text-decoration:underline}
+.g-row .stars{display:inline-flex;gap:2.5px}
+.g-row .stars svg{width:14px;height:14px;fill:var(--teal);display:block}
+.g-row .g-icon{display:block}
+
+.mcta__h{
+  margin:0;font-size:clamp(2.8rem,1.25vw + 2.4rem,4rem);font-weight:500;line-height:1.08;
+  color:var(--midnight);letter-spacing:-.01em;text-wrap:balance;
+}
+.mcta__h .grad{
+  background:linear-gradient(90deg,var(--teal-bright) 15%,var(--blue) 85%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  font-weight:600;
+}
+.mcta__p{
+  margin:0;font-size:clamp(1.6rem,.21vw + 1.53rem,1.8rem);line-height:1.6;
+  max-width:52ch;text-align:left;
+}
+
+.mcta__cta{display:flex;align-items:center;flex-wrap:wrap;gap:10px 22px;margin-top:6px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  min-height:52px;padding:14px 28px;border-radius:var(--radius-m);
+  font-size:clamp(1.5rem,.2vw + 1.45rem,1.7rem);font-weight:600;line-height:1;white-space:nowrap;
+  background:var(--teal);color:#fff;
+  box-shadow:0 6px 18px -4px rgba(0,169,145,.45);
+  transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease;
+}
+.btn:hover{transform:translateY(-1px);background:hsl(171 100% 29%);box-shadow:0 10px 24px -4px rgba(0,169,145,.5)}
+.btn:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.ring-link{
+  display:inline-flex;align-items:center;gap:8px;min-height:44px;
+  font-size:1.5rem;font-weight:500;color:var(--midnight);
+}
+.ring-link u{text-decoration-color:rgba(9,11,50,.35);text-underline-offset:3px}
+.ring-link:hover u{text-decoration-color:var(--midnight)}
+
+.mcta__media{
+  margin:0;position:relative;border-radius:var(--radius-l);overflow:hidden;align-self:stretch;
+  min-height:380px;
+}
+.mcta__media img{
+  width:100%;height:100%;object-fit:cover;object-position:50% 18%;
+  position:absolute;inset:0;
+}
+.namechip{
+  position:absolute;left:14px;bottom:14px;z-index:1;
+  display:inline-flex;align-items:center;gap:8px;
+  padding:9px 16px;border-radius:999px;
+  background:rgba(9,11,50,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  color:#fff;font-size:1.35rem;font-weight:400;line-height:1;
+}
+.namechip strong{font-weight:600}
+.namechip .dot{width:7px;height:7px;border-radius:50%;background:var(--teal-bright);flex:0 0 auto}
+
+@media (max-width:1024px){
+  .mcta__card{grid-template-columns:1fr 340px;padding:32px 36px}
+}
+@media (max-width:767px){
+  .mcta__card{grid-template-columns:1fr;gap:20px;padding:20px 20px 28px}
+  .mcta__media{order:-1;min-height:0;aspect-ratio:16/10;max-height:min(46vw,340px)}
+  .mcta__media img{object-position:50% 24%}
+  .namechip{left:12px;top:12px;bottom:auto;font-size:1.25rem;padding:8px 14px}
+  .mcta__text{align-items:center}
+  .g-row{align-self:center}
+  .mcta__h{text-align:center;font-size:clamp(2.4rem,5.5vw,3rem);line-height:1.16}
+  .mcta__p{text-align:left}
+  .mcta__cta{width:100%;flex-direction:column;gap:8px}
+  .btn{width:100%}
+}
+@media (max-width:360px){
+  .mcta__h{font-size:2.2rem}
+}
+</style>
+</head>
+<body>
+
+<section class="mcta">
+  <div class="mcta__card">
+    <div class="mcta__text">
+      <a class="g-row" href="https://www.google.com/maps/place/Ampy/@59.3576299,17.9842061,17z/data=!3m1!4b1!4m6!3m5!1s0x2bec1ce5c4ed9ce9:0xfce1752e84a1bfee!8m2!3d59.3576272!4d17.986781!16s%2Fg%2F11ypjy9rrm" target="_blank" rel="noopener" aria-label="Ampys betyg: 5,0 av 5 på Google — läs recensionerna">
+        <svg class="g-icon" width="16" height="16" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.2 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.2 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C41.4 34.8 44 29.9 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+        <span class="g-label"><strong>5,0</strong>&nbsp;på Google</span>
+        <span class="stars" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1z"/></svg>
+        </span>
+      </a>
+
+      <h2 class="mcta__h">Prata med en elektriker <span class="grad">inom 60&nbsp;sekunder!</span></h2>
+      <p class="mcta__p">Känn dig trygg med kunnig hjälp, precis när du behöver den. Prata direkt med en erfaren elektriker som lyssnar på ditt behov och guidar dig till en säker, smidig lösning.</p>
+
+      <div class="mcta__cta">
+        <a class="btn" href="https://ampy.se/kontakt/">
+          Kontakta oss
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.7 11.3 11.3 4.7M11.3 4.7H4.7M11.3 4.7v6.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="ring-link" href="tel:+46102657979">
+          <svg width="16" height="16" viewBox="0 0 19 20" fill="none" aria-hidden="true"><path d="M11.9 4.2c.8.2 1.5.6 2 1.1.6.6 1 1.3 1.1 2.1M11.9.8c1.6.2 3.1 1 4.2 2.2 1.2 1.2 1.9 2.7 2.1 4.4M17.4 14.1v2.5c0 .5-.2.9-.5 1.2-.3.3-.8.5-1.2.4-2.4-.3-4.8-1.2-6.8-2.6-1.9-1.3-3.5-3-4.8-5-1.3-2.2-2.2-4.6-2.4-7.2 0-.5.1-.9.4-1.2.3-.3.7-.5 1.2-.5h2.4c.8 0 1.5.6 1.6 1.4.1.8.3 1.6.6 2.3.2.6.1 1.3-.4 1.8l-1 1c1.1 2.1 2.8 3.8 4.7 5l1-1c.5-.5 1.2-.6 1.8-.4.7.3 1.5.5 2.3.6.8.1 1.4.8 1.4 1.7Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          eller ring <u>010-265 79 79</u>
+        </a>
+      </div>
+    </div>
+
+    <figure class="mcta__media">
+      <img src="../assets/edvin.webp" alt="Edvin, elektriker på Ampy" width="933" height="1400" fetchpriority="high">
+      <span class="namechip"><span class="dot" aria-hidden="true"></span><span><strong>Edvin</strong>&nbsp;· Elektriker, Ampy</span></span>
+    </figure>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+/* Ampy design tokens — values VERBATIM from ampy.se (fetched 2026-07-18):
+   global-variables.min.css (flying-press 775fd0e5) + color-palettes.min.css (c5a3e91e)
+   + core_framework.css (html{font-size:62.5%} → 1rem = 10px).
+   Only the tokens the Main CTA block references. Do not "fix" values here. */
+
+html{font-size:62.5%}
+
+:root{
+  /* — ap* scale (Core Framework, verbatim) — */
+  --apradius-l:clamp(1.6rem,calc(0.42vw + 1.47rem),2rem);
+  --apspace-4xs:clamp(0.52rem,calc(-0.03vw + 0.53rem),0.49rem);
+  --apspace-3xs:clamp(0.66rem,calc(0.05vw + 0.64rem),0.7rem);
+  --apspace-2xs:clamp(0.82rem,calc(0.18vw + 0.76rem),0.99rem);
+  --apspace-xs:clamp(1.02rem,calc(0.39vw + 0.9rem),1.4rem);
+  --apspace-s:clamp(1.28rem,calc(0.73vw + 1.05rem),1.98rem);
+  --apspace-m:clamp(1.6rem,calc(1.25vw + 1.2rem),2.8rem);
+  --apspace-l:clamp(2rem,calc(2.04vw + 1.35rem),3.96rem);
+  --apspace-xl:clamp(2.5rem,calc(3.23vw + 1.47rem),5.6rem);
+  --apspace-2xl:clamp(3.13rem,calc(4.99vw + 1.53rem),7.92rem);
+  --aptext-sm:clamp(1.4rem,calc(0.21vw + 1.33rem),1.6rem);
+  --aptext-m:clamp(1.6rem,calc(0.21vw + 1.53rem),1.8rem);
+  --aptext-l:clamp(2.2rem,calc(0.21vw + 2.13rem),2.4rem);
+  --aptext-2xl:clamp(2.6rem,calc(1.04vw + 2.27rem),3.6rem);
+  --aptext-2-5xl:clamp(2.8rem,calc(1.25vw + 2.4rem),4rem);
+
+  /* — legacy scale (verbatim) — */
+  --radius-m:16px;
+  --space-xs:clamp(0.90rem, calc(0.90rem + 0.0022 * (100vw - 380px)), 1.10rem);
+  --space-s:clamp(1.30rem, calc(1.30rem + 0.0033 * (100vw - 380px)), 1.60rem);
+  --space-m:clamp(2.00rem, calc(2.00rem + 0.0044 * (100vw - 380px)), 2.40rem);
+
+  /* — palette (color-palettes.min.css, verbatim) — */
+  --white:hsl(0 0% 100%);
+  --color-3:hsl(237 69% 12%);    /* midnight — heading base color */
+  --color-7:hsl(189 43% 56%);    /* blue — heading-gradient end */
+  --color-15:hsl(171 100% 33%);  /* #00a991 teal — rating text + stars */
+  --color-20:hsl(0 0% 20%);      /* mobile body-text color */
+  --color-25:hsl(171 95% 41%);   /* teal — heading-gradient start */
+
+  /* ⚑ QUIRK (verbatim from live): --text-m is referenced by
+     .main-cta-__text-basic at ≤478px but is NOT defined anywhere on ampy.se —
+     the declaration is invalid and the text falls back to the inherited size.
+     Intentionally left undefined here to match live rendering. */
+}
