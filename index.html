@@ -88,7 +88,10 @@ a{text-decoration:none;color:inherit}
    Blockets ENDA CTA. Blå brand-gradient, mjuk navy-text, vit chip med
    puls-ring, lur optiskt centrerad. Mobil: fullbredd, text vänster /
    ikon höger (live-blockets grammatik); desktop: chip vänster. */
-.mcta__cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
+/* CTA + betyg-pill i EN rad på desktop (pillen bredvid ring-knappen, inte under)
+   — mobil staplar dem (kolumn) oförändrat. */
+.mcta__action{display:flex;align-items:center;flex-wrap:wrap;gap:20px;margin-top:8px}
+.mcta__cta{display:flex;flex-wrap:wrap;gap:14px}
 .btn-ring{
   display:inline-flex;align-items:center;
   min-height:58px;border-radius:var(--radius-m);
@@ -146,7 +149,6 @@ a{text-decoration:none;color:inherit}
    indraget av paddingen — normalt för en badge). Hela pillen = EN länk, 44px. */
 .g-row{
   display:inline-flex;align-items:center;flex-wrap:nowrap;gap:8px;
-  align-self:flex-start;
   min-height:44px;padding:0 16px;
   background:#fff;
   border:1px solid rgba(9,11,50,.10);   /* hårfin kant — crisp edge på vitt */
@@ -221,6 +223,8 @@ a{text-decoration:none;color:inherit}
   .mcta__text{align-items:center}
   .mcta__h{text-align:center;font-size:clamp(2.4rem,5.5vw,3rem);line-height:1.16}
   .mcta__p{text-align:center}
+  /* mobil: stapla CTA + pill (oförändrat läge — ägaren gillar mobilversionen) */
+  .mcta__action{flex-direction:column;align-items:center;width:100%;gap:16px}
   .mcta__cta{width:100%;flex-direction:column;gap:12px}
   /* mobil: text vänster / ikon höger (live-blockets grammatik) */
   .btn-ring{width:100%;flex-direction:row-reverse;justify-content:space-between;padding:11px 12px 11px 22px}
@@ -240,6 +244,7 @@ a{text-decoration:none;color:inherit}
     <div class="mcta__text">
       <h2 class="mcta__h">Prata med en elektriker <span class="grad">inom 60<br class="br-d"> sekunder!</span></h2>
       <p class="mcta__p">Känn dig trygg med kunnig hjälp, precis när du behöver den. Prata direkt med en erfaren elektriker som lyssnar på ditt behov och guidar dig till en säker, smidig lösning.</p>
+      <div class="mcta__action">
       <div class="mcta__cta">
         <a class="btn-ring" href="tel:+46102657979">
           <span class="btn-ring__chip" aria-hidden="true">
@@ -259,6 +264,7 @@ a{text-decoration:none;color:inherit}
           <svg viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1z"/></svg>
         </span>
       </a>
+      </div>
     </div>
 
     <figure class="mcta__media">
