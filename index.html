@@ -167,23 +167,33 @@ a{text-decoration:none;color:inherit}
 /* croppen: fönstret täcker huvudtopp (~16 %) med luft ovanför NER TILL
    ampy-loggan på tröjan (~86 %) — samma framing på alla enheter */
 .mcta__media .photo{
-  width:80%;height:auto;aspect-ratio:320/385;object-fit:cover;object-position:50% 46%;
+  width:80%;height:auto;aspect-ratio:320/366;object-fit:cover;object-position:50% 46%;
   border-radius:var(--radius-l);
 }
 .mcta__wave{
   position:absolute;right:0;bottom:-1px;width:50%;height:auto;z-index:2;pointer-events:none;
 }
 
-@media (max-width:1024px){
-  .mcta__card{grid-template-columns:1fr 340px;padding:32px 36px}
-  .mcta__bgwave{right:36px;bottom:32px}
+/* tablett 768–1024: FLUID bildkolumn (aldrig bredare än texten) + lugnare rubrik
+   — löser iPad Mini/Air där fast 340px svälte textkolumnen till 3-radig rubrik */
+@media (max-width:1024px) and (min-width:768px){
+  .mcta__card{
+    grid-template-columns:minmax(0,1fr) clamp(260px,34vw,320px);
+    gap:clamp(20px,3vw,32px);
+    padding:clamp(28px,3vw,36px) clamp(28px,3.5vw,40px);
+  }
+  .mcta__bgwave{right:32px;bottom:28px;width:38%}
   .mcta__media{min-height:0}
+  .mcta__h{font-size:clamp(2.6rem,2.2vw + 1.2rem,3.2rem)}
 }
 @media (max-width:767px){
   .mcta__card{grid-template-columns:1fr;gap:20px;padding:20px 20px 28px}
   .mcta__bgwave{display:none}
-  .mcta__media{order:-1;align-self:auto;justify-content:center;min-height:0}
-  .mcta__media .photo{width:100%;aspect-ratio:320/385;object-position:50% 46%}
+  /* bild-TAK på CONTAINERN (inte motivet): aldrig fullbredd i stackat läge
+     (annars gigantisk vid 450–767) + en gnutta smalare på telefon (ägar-önskan).
+     Vågen är barn till containern → linjerar då mot bildkanten. */
+  .mcta__media{order:-1;align-self:center;justify-content:center;min-height:0;width:min(92%,360px);margin-inline:auto}
+  .mcta__media .photo{width:100%;aspect-ratio:320/366;object-position:50% 46%}
   .mcta__wave{width:60%}
   .mcta__text{align-items:center}
   .mcta__h{text-align:center;font-size:clamp(2.4rem,5.5vw,3rem);line-height:1.16}
