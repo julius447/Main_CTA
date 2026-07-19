@@ -1,0 +1,270 @@
+/* ============================================================
+   ampy-main-cta.css — Ampy "Main CTA"-block
+   FluentSnippets-leverans (WordPress/Bricks). FORMAT ONLY.
+   Källa: Main_CTA/index.html <style> (LÅST design, rev 2).
+   Inga färger/gradienter/skuggor/animationer/geometri ändrade —
+   endast (1) wrapper-scopad under .ampy-mcta, (2) rem→px, (3)
+   viewport-@media → @container, (4) self-hostad Outfit.
+
+   HTML: <section class="mcta"> → <section class="ampy-mcta">.
+   Alla mcta__*-klasser oförändrade.
+
+   rem→px (blocket antog html{font-size:62.5%} = 1rem/10px;
+   WP-root är oftast 16px → alla rem konverterade till px så
+   blocket är oberoende av temats root):
+     2.8rem→28px  4rem→40px  2.4rem→24px(i clamp)
+     1.6rem→16px  1.53rem→15.3px(i clamp)  1.8rem→18px
+     1.5rem→15px  2.6rem→26px  1.2rem→12px(i clamp)  3.2rem→32px
+     2.4rem→24px  3rem→30px  2.2rem→22px
+   vw-termer i clamp() = viewport-enheter, oberoende av root → verbatim.
+
+   @container: wrappern får container-type:inline-size + container-name,
+   och de fyra viewport-breakpointarna (1300 / 768–1024 / 767 / 360)
+   körs som @container så blocket bryter mot SIN EGEN bredd i smala
+   Bricks-kolumner, inte mot browserbredden. Feature-queries
+   (forced-colors / print / prefers-reduced-motion) + @supports är
+   INTE viewport-queries → kvar som @media/@supports, bara om-scopade.
+   ============================================================ */
+
+/* ---- Self-hostad Outfit (ingen Google Fonts) --------------------
+   Bas-URL är filtrerbar i PHP (ampy_mcta_font_base); CSS pekar på
+   standard uploads-sökväg. Vikter: 300 (body/p), 400 (g-row),
+   500 (rubrik/knapp), 700 (5,0). font-display:swap. */
+@font-face{
+  font-family:'Outfit';font-style:normal;font-weight:300;font-display:swap;
+  src:url('/wp-content/uploads/ampy/fonts/Outfit-Light.woff2') format('woff2'),
+      url('/wp-content/uploads/ampy/fonts/Outfit-Light.woff') format('woff');
+}
+@font-face{
+  font-family:'Outfit';font-style:normal;font-weight:400;font-display:swap;
+  src:url('/wp-content/uploads/ampy/fonts/Outfit-Regular.woff2') format('woff2'),
+      url('/wp-content/uploads/ampy/fonts/Outfit-Regular.woff') format('woff');
+}
+@font-face{
+  font-family:'Outfit';font-style:normal;font-weight:500;font-display:swap;
+  src:url('/wp-content/uploads/ampy/fonts/Outfit-Medium.woff2') format('woff2'),
+      url('/wp-content/uploads/ampy/fonts/Outfit-Medium.woff') format('woff');
+}
+@font-face{
+  font-family:'Outfit';font-style:normal;font-weight:700;font-display:swap;
+  src:url('/wp-content/uploads/ampy/fonts/Outfit-Bold.woff2') format('woff2'),
+      url('/wp-content/uploads/ampy/fonts/Outfit-Bold.woff') format('woff');
+}
+
+/* ---- Root wrapper: scopade tokens + container + font-bas + sektion-ram ---- */
+.ampy-mcta{
+  /* scopade custom properties (var :root) */
+  --teal:hsl(171 100% 33%);
+  --teal-bright:hsl(171 95% 41%);
+  --blue:hsl(189 43% 56%);
+  --midnight:hsl(237 69% 12%);
+  --ink:#363636;
+  --section-bg:#f5f9ff;
+  --radius-l:clamp(16px, 1.4vw, 20px);
+  --radius-m:16px;
+
+  /* container-kontext: inre breakpoints följer blockets bredd, ej viewporten */
+  container-type:inline-size;
+  container-name:ampy-mcta;
+
+  /* font-bas (var body) */
+  font-family:'Outfit',system-ui,sans-serif;font-weight:300;
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+
+  /* sektion-ram (var .mcta) */
+  background:var(--section-bg);
+  padding:clamp(28px,4vw,56px) clamp(16px,3vw,40px);
+  display:flex;justify-content:center;
+}
+.ampy-mcta,
+.ampy-mcta *,
+.ampy-mcta *::after,
+.ampy-mcta *::before{box-sizing:border-box}
+.ampy-mcta img{max-width:100%;display:block}
+.ampy-mcta a{text-decoration:none;color:inherit}
+
+.ampy-mcta .mcta__card{
+  position:relative;overflow:hidden;
+  width:min(1280px,100%);
+  background:#fff;border-radius:var(--radius-l);
+  box-shadow:0 0 16px rgba(190,190,190,.4);
+  display:grid;grid-template-columns:1fr 400px;gap:clamp(24px,3vw,48px);
+  padding:clamp(28px,3.2vw,48px) clamp(28px,4.5vw,72px);
+  align-items:center;
+}
+/* bg-vågen (Vector-3) — bakom allt, förankrad nere-höger som i originalet */
+.ampy-mcta .mcta__bgwave{
+  position:absolute;right:clamp(28px,4.5vw,72px);bottom:clamp(28px,3.2vw,48px);
+  width:44%;height:auto;z-index:0;pointer-events:none;
+}
+.ampy-mcta .mcta__text{position:relative;z-index:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+
+.ampy-mcta .mcta__h{
+  margin:0;font-size:clamp(28px,1.25vw + 24px,40px);font-weight:500;line-height:1.1;
+  color:var(--midnight);letter-spacing:-.01em;
+}
+.ampy-mcta .mcta__h .grad{
+  color:var(--teal-bright); /* fallback om text-clip ej stöds */
+  background:linear-gradient(90deg,var(--teal-bright) 15%,var(--blue) 85%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone; /* jämn gradient över radbrytning (Safari-söm) */
+  font-weight:inherit;
+}
+/* resiliens: gradient-text får aldrig försvinna om bakgrundsgrafik nollas */
+@supports not ((-webkit-background-clip:text) or (background-clip:text)){
+  .ampy-mcta .mcta__h .grad{-webkit-text-fill-color:currentColor;background:none;color:var(--teal-bright)}
+}
+@media (forced-colors:active){
+  .ampy-mcta .mcta__h .grad{-webkit-text-fill-color:currentColor;background:none;color:CanvasText}
+}
+@media print{
+  .ampy-mcta .mcta__h .grad{-webkit-text-fill-color:currentColor;background:none;color:#090b32}
+}
+/* forcerad brytning ("...inom 60" / "sekunder!") ENDAST på bred desktop där
+   vänsterkolumnen rymmer rad 1 — under 1300px sköter naturlig brytning det
+   utan orphan (verifierat: 1120px ger rent 2-radigt "...inom" / "60 sekunder!") */
+.ampy-mcta .br-d{display:none}
+@container ampy-mcta (min-width:1300px){.ampy-mcta .br-d{display:inline}}
+.ampy-mcta .mcta__p{
+  margin:0;font-size:clamp(16px,.21vw + 15.3px,18px);line-height:1.6;
+  max-width:52ch;text-align:left;
+}
+
+/* ============ RING-CTA ============
+   Blockets ENDA CTA. Blå brand-gradient, mjuk navy-text, vit chip med
+   puls-ring, lur optiskt centrerad. Mobil: fullbredd, text vänster /
+   ikon höger (live-blockets grammatik); desktop: chip vänster. */
+/* CTA + betyg-rad staplade (betyget UNDER knappen, som mobilen) — samma på desktop. */
+.ampy-mcta .mcta__action{display:flex;flex-direction:column;align-items:flex-start;gap:16px;margin-top:8px}
+.ampy-mcta .mcta__cta{display:flex;flex-wrap:wrap;gap:14px}
+.ampy-mcta .btn-ring{
+  display:inline-flex;align-items:center;
+  min-height:58px;border-radius:var(--radius-m);
+  font-size:16px;font-weight:500;line-height:1;white-space:nowrap;
+  color:hsl(237 35% 24%);
+  transition:transform .16s ease, box-shadow .16s ease, filter .16s ease;
+}
+.ampy-mcta .btn-ring{
+  gap:14px;padding:11px 30px 11px 12px;
+  background:linear-gradient(120deg,#b6f2ff 0%,#5eb1bf 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.55),
+    0 2px 4px rgba(9,11,50,.06),
+    0 10px 26px -6px rgba(94,177,191,.55);
+}
+.ampy-mcta .btn-ring:hover{
+  transform:translateY(-1.5px);
+  filter:saturate(1.08) brightness(1.02);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.55),
+    0 3px 6px rgba(9,11,50,.07),
+    0 16px 34px -8px rgba(94,177,191,.65);
+}
+.ampy-mcta .btn-ring:active{transform:translateY(0);filter:saturate(1.05)}
+.ampy-mcta .btn-ring:focus-visible{outline:3px solid var(--midnight);outline-offset:3px} /* midnight = ≥3:1 fokuskontrast mot ljus yta (var --blue ~2,5:1) */
+/* forced-colors (Windows högkontrast): gradienten strippas → synlig kant så knapp-affordansen överlever */
+@media (forced-colors:active){.ampy-mcta .btn-ring{border:1px solid ButtonText}}
+.ampy-mcta .btn-ring__chip{
+  position:relative;flex:0 0 auto;
+  width:36px;height:36px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.92);color:hsl(237 35% 24%);
+  box-shadow:0 1px 3px rgba(9,11,50,.14);
+}
+.ampy-mcta .btn-ring__chip::after{
+  content:"";position:absolute;inset:0;border-radius:50%;
+  box-shadow:0 0 0 0 rgba(255,255,255,.65);
+  animation:mctaRing 2.8s cubic-bezier(.4,0,.4,1) infinite;
+}
+@keyframes mctaRing{
+  0%{box-shadow:0 0 0 0 rgba(255,255,255,.65)}
+  55%{box-shadow:0 0 0 9px rgba(255,255,255,0)}
+  100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}
+}
+@media (prefers-reduced-motion:reduce){
+  .ampy-mcta .btn-ring__chip::after{animation:none}
+  .ampy-mcta .btn-ring,.ampy-mcta .btn-ring:hover{transition:none;transform:none}
+}
+.ampy-mcta .btn-ring svg{flex:0 0 auto}
+/* optisk mikro-nudge: luren en gnutta ner-vänster i chipen */
+.ampy-mcta .btn-ring__chip svg{transform:translate(-1px,1px)}
+
+/* proof-raden — REN inline-rad UNDER CTA:n (ingen box/container, ägar-önskan):
+   färgad Google-G · "5,0 på Google" · fem GULA stjärnor. Diskret underline på
+   hover (länk till recensioner). Hela raden = EN länk, 44px hit-area. */
+.ampy-mcta .g-row{
+  display:inline-flex;align-items:center;flex-wrap:wrap;gap:10px;
+  min-height:44px;padding:6px 0;
+  font-size:15px;font-weight:400;color:var(--midnight);line-height:1;
+}
+.ampy-mcta .g-row:hover .g-label{text-decoration:underline;text-underline-offset:3px}
+.ampy-mcta .g-row:focus-visible{outline:3px solid var(--midnight);outline-offset:3px} /* midnight = tydlig fokusring mot ljus yta */
+.ampy-mcta .g-row .g-icon{display:block;flex:0 0 auto;width:17px;height:17px}
+.ampy-mcta .g-row .g-label{display:block;white-space:nowrap}
+.ampy-mcta .g-row strong{font-weight:700}           /* "5,0" fet, "på Google" ärver 400 */
+.ampy-mcta .g-row .stars{display:inline-flex;gap:3px;flex:0 0 auto}
+.ampy-mcta .g-row .stars svg{width:15px;height:15px;fill:#FBBC04;display:block} /* gula stjärnor (ägar-önskan) */
+
+/* bildblocket — baslinjens geometri: kolumn 400px, bilden 80 % bredd,
+   flex-end, samma boxproportion som originalbilden (320×366), radius,
+   overlay-vågen nere-höger över bildens nedre hörn */
+/* OBS: overflow:hidden är BORTTAGET här — det klippte fotots fallskugga.
+   Vågen behöver inte längre klippas (den ligger inom media horisontellt och
+   är nu bottom:0, ingen 1px-blödning), och fotot bär sin egen border-radius. */
+.ampy-mcta .mcta__media{
+  margin:0;position:relative;z-index:1;align-self:stretch;
+  display:flex;align-items:flex-end;justify-content:flex-end;
+  min-height:366px;
+}
+/* croppen: fönstret täcker huvudtopp (~16 %) med luft ovanför NER TILL
+   ampy-loggan på tröjan (~86 %) — samma framing på alla enheter */
+.ampy-mcta .mcta__media .photo{
+  display:block;
+  width:80%;height:auto;aspect-ratio:320/366;object-fit:cover;object-position:50% 46%;
+  border-radius:var(--radius-l);
+  /* EN hårfin ljusring (border, INTE inset box-shadow — inset renderas ej på <img>)
+     + EN mjuk, riktad fallskugga i midnatt så porträttet lyfter från vita kortet.
+     Negativ spread håller sidfotavtrycket smalt → ryms inom kortets padding,
+     som har overflow:hidden. */
+  border:1px solid rgba(255,255,255,.55);
+  box-shadow:0 18px 40px -20px rgba(9,11,50,.26);
+}
+.ampy-mcta .mcta__wave{
+  position:absolute;right:0;bottom:0;width:50%;height:auto;z-index:2;pointer-events:none;
+}
+
+/* tablett 768–1024: FLUID bildkolumn (aldrig bredare än texten) + lugnare rubrik
+   — löser iPad Mini/Air där fast 340px svälte textkolumnen till 3-radig rubrik */
+@container ampy-mcta (max-width:1024px) and (min-width:768px){
+  .ampy-mcta .mcta__card{
+    grid-template-columns:minmax(0,1fr) clamp(260px,34vw,320px);
+    gap:clamp(20px,3vw,32px);
+    padding:clamp(28px,3vw,36px) clamp(28px,3.5vw,40px);
+  }
+  .ampy-mcta .mcta__bgwave{right:32px;bottom:28px;width:38%}
+  .ampy-mcta .mcta__media{min-height:0}
+  .ampy-mcta .mcta__h{font-size:clamp(26px,2.2vw + 12px,32px)}
+}
+@container ampy-mcta (max-width:767px){
+  .ampy-mcta .mcta__card{grid-template-columns:1fr;gap:20px;padding:20px 20px 28px}
+  .ampy-mcta .mcta__bgwave{display:none}
+  /* bild-TAK på CONTAINERN (inte motivet): aldrig fullbredd i stackat läge
+     (annars gigantisk vid 450–767) + en gnutta smalare på telefon (ägar-önskan).
+     Vågen är barn till containern → linjerar då mot bildkanten. */
+  .ampy-mcta .mcta__media{order:-1;align-self:center;justify-content:center;min-height:0;width:min(92%,360px);margin-inline:auto}
+  .ampy-mcta .mcta__media .photo{width:100%;aspect-ratio:320/366;object-position:50% 46%}
+  .ampy-mcta .mcta__wave{width:60%}
+  .ampy-mcta .mcta__text{align-items:center}
+  .ampy-mcta .mcta__h{text-align:center;font-size:clamp(24px,5.5vw,30px);line-height:1.16}
+  .ampy-mcta .mcta__p{text-align:center}
+  /* mobil: CTA + betyg-rad centrerade, fullbredd (oförändrat läge) */
+  .ampy-mcta .mcta__action{align-items:center;width:100%}
+  .ampy-mcta .mcta__cta{width:100%;flex-direction:column;gap:12px}
+  /* mobil: text vänster / ikon höger (live-blockets grammatik) */
+  .ampy-mcta .btn-ring{width:100%;flex-direction:row-reverse;justify-content:space-between;padding:11px 12px 11px 22px}
+  .ampy-mcta .g-row{align-self:center}
+}
+@container ampy-mcta (max-width:360px){
+  .ampy-mcta .mcta__h{font-size:22px}
+}
